@@ -183,12 +183,13 @@
                     <a href="portfolio/Jenish-Resume.pdf" download class="btn btn2">Download CV</a>
                 </div>
                 <div class="contact-right">
-                    <form class="submit-to-google-sheet">
+                    <form name="submit-to-google-sheet">
                         <input type="text" name="Name" placeholder="Your Name" required>
-                        <input type="email" name="email" placeholder="Your email" required>
-                        <textarea name="message" row="6" placeholder="Your Massage"></textarea>
+                        <input type="Email" name="email" placeholder="Your email" required>
+                        <textarea name="Message" row="6" placeholder="Your Massage"></textarea>
                         <button type="submit" class="btn btn2">submit</button>
                     </form>
+                     <span id="msg">Hello</span>
                 </div>
             </div>
         </div>
@@ -229,7 +230,13 @@
   form.addEventListener('submit', e => {
     e.preventDefault()
     fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-      .then(response => console.log('Success!', response))
+      .then(response => {
+                    msg.innerHTML = "Message sent successfully"
+                    setTimeout(function () {
+                        msg.innerHTML = ""
+      }, 5000)
+                        form.reset()
+      })
       .catch(error => console.error('Error!', error.message))
   })
 </script>
